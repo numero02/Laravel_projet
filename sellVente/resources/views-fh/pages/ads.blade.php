@@ -1,0 +1,111 @@
+@extends('layouts.app')
+
+@section('content')
+
+        <div class="row">
+
+            <div class="col-lg-3">
+
+                <!-- remplir dynamiquement le sélect option -->
+                <h2 class="my-4">Catégories</h2>
+                <div class="list-group">
+                    <select class="list-group-item" id="categories" name="category">
+                        <option value="">Aucune sélectionnée</option>
+                        <option value="category1">Category 1</option>
+                        <option value="category2">Category 2</option>
+                        <option value="category3">Category 3</option>
+                        <option value="category4">Category 4</option>
+                        <option value="category5">Category 5</option>
+                    </select>
+                    <!-- Ajouter une annonce affiché que si authentifié -->
+                    <a href="/ads/create" class="btn btn-primary mt-4">Ajouter une annonce</a>
+                </div>
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="row mt-2">
+
+                        @foreach($list as $li)
+                            <!-- annonce pour boucler (à compléter pour l'affichage dynamique de ce qui vient de la bd) -->
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card border_radius">
+                                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="#">{{$li->name}}</a>
+                                        </h4>
+                                        <!-- écrire budget pour un service et prix pour un produit -->
+                                        <h5>Budget ou Prix: {{$li->price}} $</h5>
+                                        <p class="font-weight-bold mb-1">
+                                            Description : <span class="font-weight-normal">{{$li->description}}</span>
+                                        </p>
+                                        <p class="font-weight-bold mb-1">
+                                            Catégorie : <span class="font-weight-normal">{{$li->category}}</span>
+                                        </p>
+
+                                        <!-- ces lignes ci-dessous ne s'affichent pas pour un produit -->
+                                        <p class="font-weight-bold mb-1">
+                                            Lieu : <span class="font-weight-normal"> {{$li->realization_place}} </span>
+                                        </p>
+                                        <p class="font-weight-bold mb-1">
+                                            Durée : <span class="font-weight-normal"> {{$li->duration}} </span>
+                                        </p>
+                                        <!-- fin des données spécifiques aux services -->
+
+                                        <p class="font-weight-bold mb-1">
+                                            Vendeur : <span class="font-weight-normal"><a href="/members/{{$li->id}}/edit">{{$li->username}}</a></span>
+                                        </p>
+                                    </div>
+                                    <!-- la façon d'afficher le nombre d'étoiles à étayer -->
+                                    <div class="card-footer">
+                                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                        <span class="ml-2 text-primary">3 950 notations</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- fin de l'annonce pour boucler -->
+                        @endforeach
+
+                    </div>
+                    <!-- /.row mt-2 -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row mb-4 -->
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
+    <!-- /.row fin de la vue -->
+
+@endsection

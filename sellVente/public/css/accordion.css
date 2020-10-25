@@ -1,0 +1,91 @@
+/** 
+ *  mise en page des messages d'un usager, dans des accordéons, 
+ *  chaque message donne lieu à une fenêtre de clavardage 
+ *  incluant l'annonces concernée et la personne à qui on s'adresse 
+ */
+input.accordeon {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+/* Accordion styles */
+
+.tabs {
+  border-radius: 8px;
+  -webkit-box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+}
+
+.tab {
+  width: 100%;
+  color: white;
+}
+
+.tab-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #2c3e50c5;
+  font-weight: bold;
+  cursor: pointer;
+  /* Icon */
+}
+
+.tab-label:hover {
+  background: #343a40;
+}
+
+.tab-label::after {
+  content: "\276F";
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+}
+
+.tab-content {
+  max-height: 0;
+  padding: 0 1rem;
+  color: #2c3e50;
+  background: white;
+  -webkit-transition: all .35s;
+  transition: all .35s;
+  overflow: scroll;
+}
+
+.tab-close {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 1rem;
+  font-size: 0.75rem;
+  background: #2c3e50;
+  cursor: pointer;
+}
+
+.tab-close:hover {
+  background: #1a252f;
+}
+
+input:checked+.tab-label {
+  background: #1a252f;
+}
+
+input:checked+.tab-label::after {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+input:checked~.tab-content {
+  max-height: 100vh;
+  padding: 1rem;
+}
